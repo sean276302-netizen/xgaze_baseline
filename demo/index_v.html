@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>眼动控制视频网页</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f5f5f7;
+        }
+        canvas {
+            display: block;
+        }
+        .page-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            color: #333;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        #videoContainer {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(246, 246, 246, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        #videoPlayer {
+            width: 90%; 
+            max-width: 1200px; 
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: -200px; 
+        }
+        #controls {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between; /* 将按钮分布在左右两侧 */
+            align-items: center;
+            padding: 0 20px; /* 增加左右边距 */
+        }
+        .control-button {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 160px; /* 增加按钮宽度 */
+            height: 160px; /* 增加按钮高度 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .control-button img {
+            width: 80px; /* 增加图标大小 */
+            height: 80px; /* 增加图标大小 */
+        }
+        #backButton {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .progress-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+        .progress-ring circle {
+            fill: none;
+            stroke: #007AFF;
+            stroke-width: 5;
+            stroke-dasharray: 0 100;
+            transition: stroke-dasharray 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <div id="pageIndicator" class="page-indicator">Page 1</div>
+    <div id="videoContainer">
+        <video id="videoPlayer" controls></video> 
+        <div id="controls">
+            <button class="control-button" id="rewindButton">
+                <img src="icons/rewind.png" alt="回退">
+                <svg class="progress-ring" width="160" height="160"> <!-- 调整大小 -->
+                    <circle r="70" cx="80" cy="80"></circle> <!-- 调整大小 -->
+                </svg>
+            </button>
+            <button class="control-button" id="playPauseButton">
+                <img src="icons/play.png" alt="播放/暂停">
+                <svg class="progress-ring" width="160" height="160"> <!-- 调整大小 -->
+                    <circle r="70" cx="80" cy="80"></circle> <!-- 调整大小 -->
+                </svg>
+            </button>
+            <button class="control-button" id="forwardButton">
+                <img src="icons/forward.png" alt="前进">
+                <svg class="progress-ring" width="160" height="160"> <!-- 调整大小 -->
+                    <circle r="70" cx="80" cy="80"></circle> <!-- 调整大小 -->
+                </svg>
+            </button>
+        </div>
+        <button class="control-button" id="backButton">
+            <img src="icons/back.png" alt="返回">
+            <svg class="progress-ring" width="160" height="160"> <!-- 调整大小 -->
+                <circle r="70" cx="80" cy="80"></circle> <!-- 调整大小 -->
+            </svg>
+        </button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
